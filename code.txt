@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 import fake_useragent
+import csv
 import lxml
 import time
 import json
@@ -70,6 +71,31 @@ def GetVacancy(link):
         "salary": salary,
         "skills": skills,
     }
+
+
+    #  Запись в csv(excel) файл. Доработать.
+    # with open("data.csv", "w") as csv_File:
+    #     writer = csv.writer(csv_File, delimiter=";")
+    #     writer.writerow(
+    #         (
+    #             "Name",
+    #             "Link",
+    #             "Salary",
+    #             "Skills",
+    #         )
+    #     )
+    #
+    # with open("data.csv", "a", encoding="utf-8", newline="") as csv_File_Append:
+    #     writer = csv.writer(csv_File_Append, delimiter=";")
+    #     writer.writerow(
+    #         (
+    #             name,
+    #             link,
+    #             salary,
+    #             skills,
+    #         )
+    #     )
+
     return Vacancy
 
 if __name__ == "__main__":
@@ -79,3 +105,4 @@ if __name__ == "__main__":
         time.sleep(1)
         with open("data.json", "w", encoding="utf-8") as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
+
