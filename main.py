@@ -31,6 +31,7 @@ def GetLinks(text):
             soup = BeautifulSoup(data.content, "lxml")
             for a in soup.find_all("a", attrs={"class" : "serp-item__title"}):
                 yield f"{a.attrs['href'].split('?')[0]}"
+               # print(f"{a.attrs['href'].split('?')[0]}") -> Ссылка на вакансию.
         except Exception as e:
             print(f"{e}")
         time.sleep(1)
@@ -49,6 +50,12 @@ def GetVacancy(link):
     except:
         name = ""
     try:
+        Link_Vacancy = link
+
+    except:
+        link = ""
+
+    try:
         salary = (soup.find(attrs={"class": "bloko-header-section-2"}).text.replace("\xa0", "")
                   )
     except:
@@ -59,6 +66,7 @@ def GetVacancy(link):
         skills = []
     Vacancy = {
         "name": name,
+        "Link_Vacancy": link,
         "salary": salary,
         "skills": skills,
     }
